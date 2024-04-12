@@ -28,7 +28,7 @@ git 模型
 + 删除文件的几种情况
 + 只在本地删除：rm
 + 同时删除git与本地中的文件：git rm
-+ 将一个暂存的新文件取消暂存 git rm --cached
++ 将一个暂存的新文件取消暂存 git rm --cached name
 + 重命名文件 git mv
 + 查看现在暂存区状态 git status
 + 16：14 gitignore命令
