@@ -1,5 +1,5 @@
 #include<stdio.h>
-
+#include<stdlib.h>
 char *gets(char *s){
     int c;
     char *dest = s;
@@ -16,5 +16,6 @@ int main(){
     char buf[8];
     gets(buf);
     puts(buf);
+    systemp("pause");
     return 0;
 }
