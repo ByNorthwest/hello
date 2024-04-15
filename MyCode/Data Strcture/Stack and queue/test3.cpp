@@ -15,14 +15,12 @@ void initial(Queue *que){
 }
 
 void EnterQueue(Queue *que,int a){
-    if (que->length == len){
-        return ;
-    }else{
+  
         que->length ++;
         que->ele[que->rear] = a;
         que->rear = (que->rear+1)%MAXSIZE;
 
-    }
+    
 }
 
 int  gettop(Queue * que){
@@ -36,26 +34,38 @@ void DeletQueue(Queue *que){
         que->front = (que->front + 1)%MAXSIZE;
     }
 }
+int  getnumber(char *a,int m){
+        int v=0;
+    for(int i=0;i<m;i++){
+        int b = a[i] - 48;
+        v +=b * (i+1);
+    }
+    return v;
+}
 void SeqQueue(){
     Queue qu;
     initial(&qu);
     int a,i=0;
-    /*#include<stdio.h>
-int main(){
-	int a;
-	while(scanf("%d",&a)){
-		printf("%d",a);
-	}
-	return 0;
-} *///其中使用while(scanf)这个技巧可以读取一整行的数//这个读没有结束了
-    while(scanf("%d",&a)){
+    char s;
+    char b[100] ;
+            int m=0;
+      scanf("%c",&s);
+    while(scanf("%c",&s)&& s!='\n'){
+    
+            m=0;
+            if(s!=' '){
+                b[m] = s;
+                m++;
+                continue;
+            }else{
+        a = getnumber(b,m);
         EnterQueue(&qu,a);
         i++;
-        if(i==len-1){
-            printf("yes");
-            break;
-        }
+        } 
     } 
+    a = getnumber(b,m);
+    EnterQueue(&qu,a);
+    i++;
     scanf("%d",&a);
     while(qu.ele[qu.front] !=a){
         DeletQueue(&qu);
@@ -65,9 +75,10 @@ int main(){
     }else{
         printf("no");
     }
+    printf("\n");
     DeletQueue(&qu);
     int g = gettop(&qu);
-    while(qu.length){
+    while(qu.length !=0){
         printf("%d ",gettop(&qu));
         DeletQueue(&qu);
     }

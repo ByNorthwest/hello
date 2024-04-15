@@ -27,6 +27,8 @@ void MoveRight ( ){
         enQueue(&que,a);
     }
     k= k%n;//考虑k比n大时的情况
+ k = n-k;//我的做法为提取出前面的元素加入到后面的队列中，
+ //不是正确的向右循环的操作，将k该为n-k即可
     for(int i=0;i<k;i++){
         int temp;
         deQueue(&que,&temp);

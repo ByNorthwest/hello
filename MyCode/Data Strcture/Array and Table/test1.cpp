@@ -25,7 +25,7 @@ void tranTSM(TSMatrix A,TSMatrix * B){
     B->len = A.len;
     B->n = A.n;
     B->m = A.m;
-    //nuumber是col
+    //number是col
     int number[MAXSIZE],position[MAXSIZE];
     for(int i=1;i<=A.len;i++){
         number[i] =0;
@@ -34,7 +34,7 @@ void tranTSM(TSMatrix A,TSMatrix * B){
         number[A.data[i].col] ++;
     }
     position[1] = 1;
-    for(int i=2;i<=A.len;i++){
+    for(int i=2;i<=A.n;i++){
         position[i] = position[i-1] + number[i-1]; 
     }
     
