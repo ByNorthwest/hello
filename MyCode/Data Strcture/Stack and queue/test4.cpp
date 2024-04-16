@@ -1,6 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
-#define MAXSIZE 110
+#define MAXSIZE 1000
 typedef struct {
     int data[MAXSIZE];
     int rear;
@@ -20,6 +20,7 @@ void enQueue(SeqQueue * que,int a){
     //理解课本上损失一个元素的意义是什么
         que->data[que->rear] = a;
         que->rear =(que->rear + 1)% k;
+
     if (que->rear == que->front && que->tag ==0 ){
         que->tag =1;
     }
@@ -33,7 +34,7 @@ void Fibonaci(){
     SeqQueue que;
     initial(&que);
         for(int i=0;i<k;i++){
-        enQueue(&que,0);
+        enQueue(&que,1);
     }
     
     enQueue(&que,1);

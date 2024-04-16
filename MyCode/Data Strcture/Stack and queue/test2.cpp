@@ -10,7 +10,7 @@ void initial(Stack * st){
     st->top = -1;
 }
 int proirity(char ch1,char ch2){
-    if (ch1 =='*' &&(ch2 =='-'||ch2 =='+')||ch1 =='/'&&(ch2 =='+'||ch2='-')){
+    if (ch1 =='*' &&(ch2 =='-'||ch2 =='+')||ch1 =='/'&& (ch2 =='+'||ch2='-')){
         return 1;
     }else{
         return 0;

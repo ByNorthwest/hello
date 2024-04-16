@@ -26,11 +26,12 @@ void createCross(CrossList * A,int m,int n,int num){
         p ->row = k;
         p->col = j;
         p->num = e;
-        if (A->row_head[i]==NULL)
+        if (A->row_head[i]==NULL){
             A->row_head[i] = p;
+            p->right =NULL;}
         else{
             LNode q = A->row_head[i];
-            while(q->right ){
+            while(q->right !=NULL){
                 q = q->right;
 
             }
@@ -41,44 +42,45 @@ void createCross(CrossList * A,int m,int n,int num){
     }
 }
 void calculateCross(CrossList * A, CrossList B){
-    
-    for(int i=1;i<=A->m;i++){
-        LNode pa  =A->row_head[i];
-        LNode pb =B.row_head[i];
-        while(pb !=NULL){
+    for(int i = 1; i <= A->m; i++){
+        LNode pa = A->row_head[i];
+        LNode pb = B.row_head[i];
+        while(pa != NULL && pb != NULL){  // 检查 pa 和 pb 是否为空
             if(pa->col == pb->col){
-            pa->num +=pb->num;
-            pa = pa->right;
-            pb =pb->right;
-            }else if(pa->col < pb->col){
-                 pa = pa->right;
-            }else{
-                LNode newnode  = (LNode)malloc(sizeof(Node));
+                pa->num += pb->num;
+                pa = pa->right;
+                pb = pb->right;
+            } else if(pa->col < pb->col){
+                pa = pa->right;
+            } else {
+                LNode newnode = (LNode)malloc(sizeof(Node));
                 newnode->col = pb->col;
                 newnode->num = pb->num;
                 newnode->row = i;
-                newnode->down =NULL;
+                newnode->down = NULL;
                 if(newnode->col < A->row_head[i]->col){
                     newnode->right = A->row_head[i];
                     A->row_head[i] = newnode;
-                 }else{
-                    newnode->right = pa->right;
-                    pa->right = newnode;
-                 }
-                 pb = pb->right;
+                } else {
+                    newnode->right = pa;
+                    pa = newnode;  // 更新 pa 为新节点，而不是 pa->right
+                }
+                pb = pb->right;
             }
         }
-        
     }
 }
+
 void outputCross(CrossList A){
-    for(int i =1;i <=A.m ;i++){
-        while(A.row_head[i]!= NULL){
-            printf("%d %d %d\n",A.row_head[i]->row,A.row_head[i]->col,A.row_head[i]->num);
-            A.row_head[i] = A.row_head[i] ->right;
+    for(int i = 1; i <= A.m; i++){
+        LNode temp = A.row_head[i];  // 使用临时变量来遍历链表，而不是直接修改 A.row_head[i]
+        while(temp != NULL){
+            printf("%d %d %d\n", temp->row, temp->col, temp->num);
+            temp = temp->right;
         }
     }
 }
+
 void master(){
     CrossList A,B;
     int m,n,num1,num2;
