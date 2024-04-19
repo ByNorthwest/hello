@@ -34,12 +34,12 @@ void Fibonaci(){
     SeqQueue que;
     initial(&que);
         for(int i=0;i<k;i++){
-        enQueue(&que,1);
+        enQueue(&que,0);
     }
     
     enQueue(&que,1);
     enQueue(&que,1);
-    int a,b,c;
+    /* int a,b,c;
     a = 1;
     b = 1;
     c = 2;
@@ -48,12 +48,26 @@ void Fibonaci(){
         a = b;
         b = c;
         c = a +b;
+    } */
+    int c = 2;
+    while(c<=max){
+        enQueue(&que,c);
+        int sum = 0;
+        int  que1 = que.rear;
+        int  que2 = que.front;
+        do{
+            sum +=que.data[que1];
+            que1 = (que1+1)%k;
+        }while(que1 != que2);
+        c = sum;
     }
     int h;
-    for(int i=0;i<k;i++){
+    for(int i=0;i<k-1;i++){
         deQueue(&que,&h);
         printf("%d ",h);
     }
+    deQueue(&que,&h);
+    printf("%d",h);
 }
 
 int main(){

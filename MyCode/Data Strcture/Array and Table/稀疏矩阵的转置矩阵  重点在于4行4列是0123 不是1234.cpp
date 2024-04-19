@@ -7,11 +7,11 @@ typedef struct {
 }Tripe;
 typedef struct {
     Tripe data[MAXSIZE];
-    int m,n,len;
+    int m,n,len;//矩阵的行，列和非零元个数
 }TSMatrix; 
-void initialTSM(TSMatrix *A){
-    A->m=0;
-    A->n=0;
+void initialTSM(TSMatrix *A,int n, int m){
+    A->m=m;
+    A->n=n;
     A->len = 0;
 }
 void outputTSM(TSMatrix A){
@@ -23,18 +23,18 @@ void outputTSM(TSMatrix A){
 }
 void tranTSM(TSMatrix A,TSMatrix * B){
     B->len = A.len;
-    B->n = A.n;
-    B->m = A.m;
+    B->n = A.m;
+    B->m = A.n;
     //number是col
     int number[MAXSIZE],position[MAXSIZE];
-    for(int i=1;i<=A.len;i++){
+    for(int i=0;i<A.n;i++){
         number[i] =0;
     }
     for(int i=1;i<=A.len;i++){
-        number[A.data[i].col] ++;
+        ++number[A.data[i].col] ;
     }
-    position[1] = 1;
-    for(int i=2;i<=A.n;i++){
+    position[0] = 1;
+    for(int i=1;i<A.n;i++){
         position[i] = position[i-1] + number[i-1]; 
     }
     
@@ -44,13 +44,11 @@ void tranTSM(TSMatrix A,TSMatrix * B){
         B->data[q].num = A.data[i].num;
         B->data[q].col= A.data[i].row;
         B->data[q].row = A.data[i].col;
-        position[col]++;
+        ++position[col];
     }
 }
-void appendTSM(TSMatrix *A,int n,int m,int row,int col ,int num){
+void appendTSM(TSMatrix *A,int row,int col ,int num){
     A->len++;
-    A->m = m;
-    A->n =n;
     A->data[A->len].num = num;
     A->data[A->len].col = col;
     A->data[A->len].row = row;
@@ -60,16 +58,16 @@ void master(){
     scanf("%d%d",&n,&m);
     int row,col,num;
     TSMatrix A;
-    initialTSM(&A);
+    initialTSM(&A,n,m);
     while(scanf("%d%d%d",&row,&col,&num)){
         if (row == 0 && col == 0 && num == 0){
             break;
         }
-        appendTSM(&A,n,m,row,col,num);
+        appendTSM(&A,row,col,num);
     }
     //进行一次定位转置稀疏矩阵A，创建稀疏矩阵B
     TSMatrix B;
-    initialTSM(&B);
+    initialTSM(&B,n,m);
     tranTSM(A,&B);
     outputTSM(B);
 }

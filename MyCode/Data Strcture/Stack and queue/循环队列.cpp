@@ -1,5 +1,6 @@
 #include<stdio.h>
 #include<stdlib.h>
+
 #define MAXSIZE 100
 typedef struct {
     int ele[MAXSIZE];
@@ -45,45 +46,43 @@ int  getnumber(char *a,int m){
 void SeqQueue(){
     Queue qu;
     initial(&qu);
-    int a,i=0;
-    char s;
-    char b[100] ;
-            int m=0;
-      scanf("%c",&s);
-    while(scanf("%c",&s)&& s!='\n'){
-    
-            m=0;
-            if(s!=' '){
-                b[m] = s;
-                m++;
-                continue;
-            }else{
-        a = getnumber(b,m);
-        EnterQueue(&qu,a);
+    int i = 0,A[MAXSIZE];
+    while(1){
+        scanf("%d",&A[i]);
         i++;
-        } 
-    } 
-    a = getnumber(b,m);
-    EnterQueue(&qu,a);
-    i++;
-    scanf("%d",&a);
-    while(qu.ele[qu.front] !=a){
-        DeletQueue(&qu);
+        char c = getchar();
+        if(c=='\n')
+            break;
     }
-    if(i ==len){
+    
+    int k= i;
+    i = 0;
+    while(i<k){
+        EnterQueue(&qu,A[i]);
+        i++;
+    }
+    int d;
+    scanf("%d",&d);
+    if ( i == len){
         printf("yes");
     }else{
         printf("no");
     }
-    printf("\n");
+    while(d != gettop(&qu)){
+        DeletQueue(&qu);
+    }
     DeletQueue(&qu);
+    printf("\n");
     int g = gettop(&qu);
-    while(qu.length !=0){
+    while(qu.length !=1){
         printf("%d ",gettop(&qu));
         DeletQueue(&qu);
     }
+    printf("%d",gettop(&qu));
+        DeletQueue(&qu);
     printf("\n%d",g);
 }
+
 int main(){
     scanf("%d",&len);
     SeqQueue();
