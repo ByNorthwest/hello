@@ -22,6 +22,7 @@ void appendTSM(TSMatrix *A,int row,int col,int num){
     A->data[A->len ].col = col;
     A->data[A->len].row = row;
     A->data[A->len].num = num;
+    
 }
 TSMatrix calculateTSM(TSMatrix A,TSMatrix B){
     int i = 1 ,p = 1,sum=0;
